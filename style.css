@@ -1,0 +1,135 @@
+html {
+    background-color: /*#121212*/#1f1f1f;
+}
+
+#everything{
+    display:grid;
+    text-align: center;
+    justify-content: center;
+}
+
+h2 {
+    color: white;
+    font-size: 2em;
+}
+
+h3 {
+    color: white;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.container {
+    display: grid;
+    border: 3px outset;
+    background-color: #BCBCBC;
+}
+
+.display {
+    background-color: #3E4345;
+    border: 3px inset;
+    margin: 10px;
+    margin-bottom: 0;
+    
+}
+
+.btContainer {
+    display: flex;
+    margin: 5px 10px 5px 10px;
+    justify-content: space-between;
+    
+}
+
+.dropdwnbt{
+    border: 3px outset;
+    margin: 0px 5px 10px 5px;
+    font-weight: 600;
+}
+
+.dropdwnbt:active {
+    border-style: inset;
+}
+
+#easy {
+    color: green;
+}
+
+#medium {
+    color: blue;
+}
+
+#hard {
+    color: red;
+}
+
+.displaybt {
+    background-color: black;
+    color: red;
+    padding: 0;
+    font-weight: 700;
+    font-size: 1.5em;
+    border: none;
+    
+}
+
+.table {
+    display: grid;
+    border: 3px inset;
+    margin: 10px;
+    
+}
+
+.row{
+    display: flex;
+}
+
+.box, #reset {
+    border: 3px outset;
+    background-color: #B8B8B8;
+}
+
+/* .box:active {
+    border: 3px inset;
+} */
+
+#reset {
+    padding: 0;
+}
+
+.blank {
+    padding: 10px 10px 10px 10px;
+}
+
+.flag {
+    padding: 0;
+}
+
+.flag:active {
+    border: 3px outset;
+} 
+
+.row img {
+    width: 20px;
+    height: 20px;
+}
+
+.mine {
+    text-align: center;
+    height: 26px;
+    width: 26px;
+    font-size: 2.3rem;
+    font-weight: 400;
+    color: black;
+    background-color: #BCBCBC;
+
+}
+
+.empty {
+    font-size: 1.4rem;
+    font-weight: 1000;
+    text-align: center;
+    height: 24px;
+    width: 24px;
+    border: 1px solid gray;
+    background-color: #BCBCBC;
+}
