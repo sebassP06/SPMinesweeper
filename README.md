@@ -1,2 +1,2 @@
 # SPMinesweeper
-A clone of the original minesweeper
+A bad clone of the original minesweeper
