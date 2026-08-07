@@ -26,13 +26,13 @@ function createTable(arr) {
     const colDiv = document.createElement('div');
     colDiv.setAttribute('class', 'col');
     document.querySelector('.table').appendChild(colDiv);
-    let boxCt = 1;
+    let boxCtr = 1;
     for(let i=0;i < arr.length-BUFFERSIZE; i++){
         const rowDiv = document.createElement('div');
         rowDiv.setAttribute('class', 'row');
         colDiv.append(rowDiv);
         for(let j=0; j < arr[i].length-BUFFERSIZE; j++){
-                const boxes = new box(boxCt++);
+                const boxes = new box(boxCtr++);
                 rowDiv.appendChild(boxes.bx);
         }
     }
@@ -47,8 +47,9 @@ function refresh() {
     containerDiv.setAttribute('style', 'width:260px');
     const arr = create2DArray(EASYWIDTH, EASYHEIGHT);
     boxCt = (arr.length-BUFFERSIZE) * (arr[0].length-BUFFERSIZE) - EASYMINES;
-    createTable(arr);
     assignMines(EASYMINES, arr);
+    assignNums(arr);
+    createTable(arr);
 }
 
 function startGame() {
@@ -74,38 +75,52 @@ function initArr(event){
         containerDiv.setAttribute('style', 'width:260px');
         const arr = create2DArray(EASYWIDTH, EASYHEIGHT);
         boxCt = (arr.length-BUFFERSIZE) * (arr[0].length-BUFFERSIZE) - EASYMINES;
-        createTable(arr);
         assignMines(EASYMINES, arr);
-        //console.log(arr);
+        assignNums(arr);
+        createTable(arr);
+        console.log(arr);
     }
     else if(event.target.textContent == 'Medium'){
         containerDiv.setAttribute('style', 'width:440px');
         const arr = create2DArray(MEDWIDTH, MEDHEIGHT);
         boxCt = (arr.length-BUFFERSIZE) * (arr[0].length-BUFFERSIZE) - MEDMINES;
-        createTable(arr);
         assignMines(MEDMINES, arr);
+        assignNums(arr);
+        createTable(arr);
     }
     else if(event.target.textContent == 'Hard'){
         containerDiv.setAttribute('style', 'width:805px');
         const arr = create2DArray(HARDWIDTH, HARDHEIGHT);
         boxCt = (arr.length-BUFFERSIZE) * (arr[0].length-BUFFERSIZE) - HARDMINES;
-        createTable(arr);
         assignMines(HARDMINES, arr);
-        //console.log(arr);
+        assignNums(arr);
+        createTable(arr);
+        console.log(arr);
     }
 }
 
 function removebt(ev, bt, arr) {
     switch(ev.button){
-        case 0:
+        case 0: //left-click
             if(bt.querySelector('img'))
                 break;
             else{
                 startClock();
-                createDiv(arr, bt);
+                const parentDiv = bt.parentElement;
+                const prevbt = bt.previousSibling;
+                const btID = bt.id;
+                bt.remove();
+                bt = document.createElement('div');
+                bt.setAttribute('class', 'empty');
+                bt.setAttribute('id', btID);
+                displayNum(arr, bt);
+                if(prevbt == null)
+                    parentDiv.insertBefore(bt, parentDiv.firstChild);
+                else
+                    parentDiv.insertBefore(bt, prevbt.nextSibling);
             }
             break;
-        case 2:
+        case 2: //right-click
             if(bt.querySelector('img')){
                 flagCt++;
                 bt.querySelector('img').remove();
@@ -160,82 +175,50 @@ function assignMines(mines, arr) {
         assignMines(mines, arr);
 }
 
-function assignNums(arr, bt) {
-    let row = Math.ceil((Number)(bt.id) / (arr[0].length-BUFFERSIZE));
-    let col = (Number)(bt.id) % (arr[0].length-BUFFERSIZE);
-    if(col == 0)
-        col = arr[0].length-BUFFERSIZE;
+function assignNums(arr) {
     let numCt = 0;
-    //console.log('Row '+row+' col '+col);
-    if(arr[row][col] == -1){
-        gameOver(arr, bt);
-        return;
-    }
-    
-    for(let i=0;i < 8;i++){
-        switch(i){
-            case 0:
-                col++;
-                break;
-            case 1:
+    for(let i=1, row=1;i < arr.length-1; i++, row++){
+        for(let j=1, col=1; j < arr[i].length-1;j++, col++){
+            if(arr[i][j] == -1)
+                continue;
+            else{
+                for(let k=0;k < 8;k++){
+                    switch(k){
+                        case 0:
+                            col++;
+                            break;
+                        case 1:
+                            row--;
+                            break;
+                        case 2:
+                            col--;
+                            break;
+                        case 3:
+                            col--;
+                            break;
+                        case 4:
+                            row++;
+                            break;
+                        case 5:
+                            row++;
+                            break;
+                        case 6:
+                            col++;
+                            break;
+                        case 7:
+                            col++;
+                            break;
+                    }
+                    if(arr[row][col] == -1)
+                        numCt++;
+                }
+                arr[i][j] = numCt;
                 row--;
-                break;
-            case 2:
                 col--;
-                break;
-            case 3:
-                col--;
-                break;
-            case 4:
-                row++;
-                break;
-            case 5:
-                row++;
-                break;
-            case 6:
-                col++;
-                break;
-            case 7:
-                col++;
-                break;
-        }
-        if(arr[row][col] == -1)
-            numCt++;
-    }
-    if(numCt != 0){
-        bt.textContent = numCt;
-        switch(numCt){
-            case 1:
-                bt.setAttribute('style', 'color: blue;');
-                break;
-            case 2:
-                bt.setAttribute('style', 'color: green;');
-                break;
-            case 3:
-                bt.setAttribute('style', 'color: red;');
-                break;
-            case 4:
-                bt.setAttribute('style', 'color: navy;');
-                break;
-            case 5:
-                bt.setAttribute('style', 'color: #800508;');
-                break;
-            case 6:
-                bt.setAttribute('style', 'color: cyan;');
-                break;
-            case 7:
-                bt.setAttribute('style', 'color: black;');
-                break;
-            default:
-                bt.setAttribute('style', 'color: #7F7F7F;');
-                break;
+                numCt = 0;
+            }
         }
     }
-
-    boxCt--;
-    if(boxCt == 0)
-        gameWin();
-
 }
 
 function displayFlag() {
@@ -291,19 +274,52 @@ function gameOver(arr, bt) {
     winorlose = true;
 }
 
-function createDiv(arr, bt) {
-    const parentDiv = bt.parentElement;
-    const prevbt = bt.previousSibling;
-    const btID = bt.id;
-    bt.remove();
-    bt = document.createElement('div');
-    bt.setAttribute('class', 'empty');
-    bt.setAttribute('id', btID);
-    assignNums(arr, bt);
-    if(prevbt == null)
-        parentDiv.insertBefore(bt, parentDiv.firstChild);
-    else
-        parentDiv.insertBefore(bt, prevbt.nextSibling);
+
+function displayNum(arr, bt){
+    let row = Math.ceil((Number)(bt.id) / (arr[0].length-BUFFERSIZE));
+    let col = (Number)(bt.id) % (arr[0].length-BUFFERSIZE);
+    if(col == 0)
+        col = arr[0].length-BUFFERSIZE;
+    //console.log('Row '+row+' col '+col);
+    if(arr[row][col] == -1){
+        gameOver(arr, bt);
+        return;
+    }
+
+    if(arr[row][col] != 0){
+        bt.textContent = arr[row][col];
+        switch(arr[row][col]){
+            case 1:
+                bt.setAttribute('style', 'color: blue;');
+                break;
+            case 2:
+                bt.setAttribute('style', 'color: green;');
+                break;
+            case 3:
+                bt.setAttribute('style', 'color: red;');
+                break;
+            case 4:
+                bt.setAttribute('style', 'color: navy;');
+                break;
+            case 5:
+                bt.setAttribute('style', 'color: #800508;');
+                break;
+            case 6:
+                bt.setAttribute('style', 'color: cyan;');
+                break;
+            case 7:
+                bt.setAttribute('style', 'color: black;');
+                break;
+            default:
+                bt.setAttribute('style', 'color: #7F7F7F;');
+                break;
+        }
+    }
+
+    boxCt--;
+    if(boxCt == 0)
+        gameWin();
+
 }
 
 function startClock() {
