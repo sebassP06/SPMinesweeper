@@ -11,6 +11,7 @@ let mineCt = 0;
 let flagCt = 0;
 let boxCt = 0;
 let timer, sec = 0;
+//let regexp = /android|iphone|kindle|ipad/i;
 
 const containerDiv = document.querySelector('.container');
 
@@ -38,7 +39,8 @@ function createTable(arr) {
     }
     const btArr = document.querySelectorAll('.box');
     btArr.forEach(bt => {
-        bt.addEventListener('mousedown', (e) => {removebt(e, bt, arr)});
+        //if(regexp.test(navigator.userAgent))//checking if mobile else desktop
+        bt.addEventListener('pointerdown', (e) => {removebt(e, bt, arr)});
         });
     resetTable = true;
 }
@@ -55,7 +57,7 @@ function refresh() {
 function startGame() {
     const dropdwnbtArr = document.querySelectorAll('.dropdwnbt');
     dropdwnbtArr.forEach(bt => {
-        bt.addEventListener('mouseup', initArr);});
+        bt.addEventListener('pointerup', initArr);});
 }
 
 function initArr(event){
@@ -78,7 +80,7 @@ function initArr(event){
         assignMines(EASYMINES, arr);
         assignNums(arr);
         createTable(arr);
-        console.log(arr);
+        //console.log(arr);
     }
     else if(event.target.textContent == 'Medium'){
         containerDiv.setAttribute('style', 'width:440px');
@@ -95,7 +97,7 @@ function initArr(event){
         assignMines(HARDMINES, arr);
         assignNums(arr);
         createTable(arr);
-        console.log(arr);
+        //console.log(arr);
     }
 }
 
@@ -288,7 +290,38 @@ function displayNum(arr, bt){
 
     if(arr[row][col] != 0){
         bt.textContent = arr[row][col];
-        switch(arr[row][col]){
+        styleNum(arr[row][col], bt);
+    }
+    /* else{ //remove all boxes that contain 0
+        const btArr = document.querySelectorAll('.box');
+        btArr.forEach(but => {
+            let row = Math.ceil((Number)(but.id) / (arr[0].length-BUFFERSIZE));
+            let col = (Number)(but.id) % (arr[0].length-BUFFERSIZE);
+            if(col == 0)
+                col = arr[0].length-BUFFERSIZE;
+            if(arr[row][col] == 0){
+                const parentDiv = but.parentElement;
+                const prevbt = but.previousSibling;
+                but.remove();
+                const newBt = document.createElement('div');
+                newBt.setAttribute('class', 'empty');
+                if(prevbt == null)
+                    parentDiv.insertBefore(newBt, parentDiv.firstChild);
+                else
+                    parentDiv.insertBefore(newBt, prevbt.nextSibling);
+                boxCt--;
+            }
+        });
+    } */
+    boxCt--;
+    //console.log(boxCt);
+    if(boxCt == 0)
+        gameWin();
+
+}
+
+function styleNum(num, bt){
+    switch(num){
             case 1:
                 bt.setAttribute('style', 'color: blue;');
                 break;
@@ -313,13 +346,7 @@ function displayNum(arr, bt){
             default:
                 bt.setAttribute('style', 'color: #7F7F7F;');
                 break;
-        }
     }
-
-    boxCt--;
-    if(boxCt == 0)
-        gameWin();
-
 }
 
 function startClock() {
@@ -351,7 +378,6 @@ function displayTimer(){
         stopClock();
     }
 }
-
 
 refresh();
 startGame();
