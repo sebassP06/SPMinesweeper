@@ -40,7 +40,7 @@ function createTable(arr) {
     const btArr = document.querySelectorAll('.box');
     btArr.forEach(bt => {
         //if(regexp.test(navigator.userAgent))//checking if mobile else desktop
-        bt.addEventListener('pointerdown', (e) => {removebt(e, bt, arr)});
+        bt.addEventListener('mousedown', (e) => {removebt(e, bt, arr)});
         });
     resetTable = true;
 }
