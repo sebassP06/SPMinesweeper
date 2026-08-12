@@ -114,6 +114,7 @@ function createFlag(bt){
         flagCt++;
         bt.querySelector('img').remove();
         bt.setAttribute('class', 'box blank');
+        window.clearTimeout(mouseTimer);
         }
     else{
         flagCt--;
@@ -128,40 +129,29 @@ function createFlag(bt){
 function removebt(ev, bt, arr) {
     switch(ev.button){
         case 0: //left-click
-            if(mouseTimer)
-                break;
-            else if(bt.querySelector('img'))
-                break;
-            else{
-                startClock();
-                const parentDiv = bt.parentElement;
-                const prevbt = bt.previousSibling;
-                const btID = bt.id;
-                bt.remove();
-                bt = document.createElement('div');
-                bt.setAttribute('class', 'empty');
-                bt.setAttribute('id', btID);
-                displayNum(arr, bt);
-                if(prevbt == null)
-                    parentDiv.insertBefore(bt, parentDiv.firstChild);
-                else
-                    parentDiv.insertBefore(bt, prevbt.nextSibling);
+            if(mouseTimer || !regexp.test(navigator.userAgent)){
+                window.clearTimeout(mouseTimer);
+                if(bt.querySelector('img'))
+                    break;
+                else{
+                    startClock();
+                    const parentDiv = bt.parentElement;
+                    const prevbt = bt.previousSibling;
+                    const btID = bt.id;
+                    bt.remove();
+                    bt = document.createElement('div');
+                    bt.setAttribute('class', 'empty');
+                    bt.setAttribute('id', btID);
+                    displayNum(arr, bt);
+                    if(prevbt == null)
+                        parentDiv.insertBefore(bt, parentDiv.firstChild);
+                    else
+                        parentDiv.insertBefore(bt, prevbt.nextSibling);
+                }
             }
             break;
         case 2: //right-click
-            if(bt.querySelector('img')){
-                flagCt++;
-                bt.querySelector('img').remove();
-                bt.setAttribute('class', 'box blank');
-                }
-            else{
-                flagCt--;
-                bt.setAttribute('class', 'box flag');
-                const img = document.createElement('img');
-                img.setAttribute('src', './flag1.jpg');
-                bt.appendChild(img);
-            }
-            displayFlag();
+            createFlag(bt);
             break;
     }
     if (mouseTimer) window.clearTimeout(mouseTimer);
