@@ -43,7 +43,7 @@ function createTable(arr) {
     btArr.forEach(bt => {
         if(regexp.test(navigator.userAgent))//checking if mobile else desktop
             bt.addEventListener('pointerdown', () => {createFlagOnHold(bt)});
-        bt.addEventListener('mouseup', (e) => {removebt(e, bt, arr)});
+        bt.addEventListener('pointerup', (e) => {removebt(e, bt, arr)});
         });
     resetTable = true;
 }
