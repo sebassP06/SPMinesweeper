@@ -130,7 +130,6 @@ function removebt(ev, bt, arr) {
     switch(ev.button){
         case 0: //left-click
             if(mouseTimer || !regexp.test(navigator.userAgent)){
-                window.clearTimeout(mouseTimer);
                 if(bt.querySelector('img'))
                     break;
                 else{
