@@ -11,6 +11,7 @@ let mineCt = 0;
 let flagCt = 0;
 let boxCt = 0;
 let timer, sec = 0;
+let firstClick = true;
 //let regexp = /android|iphone|kindle|ipad/i;
 
 const containerDiv = document.querySelector('.container');
@@ -61,6 +62,7 @@ function startGame() {
 }
 
 function initArr(event){
+    firstClick = true;
     document.querySelector('#reset').querySelector('img').setAttribute('src', './smiley-face.gif');
     if(winorlose){
         document.querySelector('.table').removeAttribute('style');
@@ -283,10 +285,21 @@ function displayNum(arr, bt){
     if(col == 0)
         col = arr[0].length-BUFFERSIZE;
     //console.log('Row '+row+' col '+col);
-    if(arr[row][col] == -1){
+    if(arr[row][col] == -1 && firstClick){
+        let randCol = Math.floor(Math.random() * (arr[0].length-BUFFERSIZE-1)+1);
+        while(arr[row][randCol] == -1){
+            randCol = Math.floor(Math.random() * (arr[0].length-BUFFERSIZE-1)+1);
+        }
+        arr[row][col] = 0;
+        arr[row][randCol] = -1;
+        assignNums(arr);
+    }
+    else if(arr[row][col] == -1){
         gameOver(arr, bt);
         return;
     }
+    if(firstClick)
+        firstClick = false;
 
     if(arr[row][col] != 0){
         bt.textContent = arr[row][col];
