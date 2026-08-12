@@ -12,7 +12,8 @@ let flagCt = 0;
 let boxCt = 0;
 let timer, sec = 0;
 let firstClick = true;
-//let regexp = /android|iphone|kindle|ipad/i;
+let mouseTimer;
+let regexp = /android|iphone|kindle|ipad/i;
 
 const containerDiv = document.querySelector('.container');
 
@@ -40,8 +41,9 @@ function createTable(arr) {
     }
     const btArr = document.querySelectorAll('.box');
     btArr.forEach(bt => {
-        //if(regexp.test(navigator.userAgent))//checking if mobile else desktop
-        bt.addEventListener('mousedown', (e) => {removebt(e, bt, arr)});
+        if(regexp.test(navigator.userAgent))//checking if mobile else desktop
+            bt.addEventListener('pointerdown', () => {createFlagOnHold(bt)});
+        bt.addEventListener('mouseup', (e) => {removebt(e, bt, arr)});
         });
     resetTable = true;
 }
@@ -103,10 +105,32 @@ function initArr(event){
     }
 }
 
+function createFlagOnHold(bt){
+    mouseTimer = window.setTimeout(createFlag,500, bt);
+}
+
+function createFlag(bt){
+    if(bt.querySelector('img')){
+        flagCt++;
+        bt.querySelector('img').remove();
+        bt.setAttribute('class', 'box blank');
+        }
+    else{
+        flagCt--;
+        bt.setAttribute('class', 'box flag');
+        const img = document.createElement('img');
+        img.setAttribute('src', './flag1.jpg');
+        bt.appendChild(img);
+    }
+    displayFlag();
+}
+
 function removebt(ev, bt, arr) {
     switch(ev.button){
         case 0: //left-click
-            if(bt.querySelector('img'))
+            if(mouseTimer)
+                break;
+            else if(bt.querySelector('img'))
                 break;
             else{
                 startClock();
@@ -140,6 +164,7 @@ function removebt(ev, bt, arr) {
             displayFlag();
             break;
     }
+    if (mouseTimer) window.clearTimeout(mouseTimer);
 }
 
 function create2DArray(width, height) {
