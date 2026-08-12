@@ -121,6 +121,7 @@ h3 {
     font-weight: 400;
     color: black;
     background-color: #BCBCBC;
+    user-select: none;
 
 }
 
@@ -132,4 +133,5 @@ h3 {
     width: 24px;
     border: 1px solid gray;
     background-color: #BCBCBC;
+    user-select: none;
 }
