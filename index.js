@@ -106,7 +106,7 @@ function initArr(event){
 }
 
 function createFlagOnHold(bt){
-    mouseTimer = window.setTimeout(createFlag,500, bt);
+    mouseTimer = window.setTimeout(createFlag,750, bt);
 }
 
 function createFlag(bt){
