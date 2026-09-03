@@ -2,7 +2,6 @@ html {
     background-color: /*#121212*/#1f1f1f;
     font-family: "Times New Roman", serif;
     font-size: 16;
-    touch-action: manipulation;
 } 
 
 #everything{
@@ -10,6 +9,7 @@ html {
     text-align: center;
     justify-content: center;
     user-select: none;
+    touch-action: manipulation;
 }
 
 h2 {
