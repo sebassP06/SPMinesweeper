@@ -1,6 +1,5 @@
 html {
     background-color: /*#121212*/#1f1f1f;
-    font-family: "Times New Roman", serif;
     font-size: 16;
 } 
 
@@ -117,22 +116,24 @@ h3 {
     height: 20px;
 }
 
-.mine {
-    text-align: center;
-    height: 26px;
+.mine{
+    border: 0px;
+    padding: 0px;
+}
+
+.mine img{
     width: 26px;
-    font-size: 2.3rem;
-    font-weight: 400;
-    color: black;
-    background-color: #BCBCBC;
+    height: 26px;
 }
 
 .empty {
+    font-family: "Times New Roman", serif;
     font-size: 1.4rem;
     font-weight: 1000;
     text-align: center;
-    height: 24px;
-    width: 24px;
+    height: 26px;
+    width: 26px;
     border: 1px solid gray;
     background-color: #BCBCBC;
+    pointer-events: none;
 }
