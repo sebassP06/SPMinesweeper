@@ -116,7 +116,7 @@ function createFlag(bt){
         bt.setAttribute('class', 'box blank');
         window.clearTimeout(mouseTimer);
         }
-    else{
+    else if(!(bt.className == "empty")){
         flagCt--;
         bt.setAttribute('class', 'box flag');
         const img = document.createElement('img');
@@ -134,18 +134,7 @@ function removebt(ev, bt, arr) {
                     break;
                 else{
                     startClock();
-                    const parentDiv = bt.parentElement;
-                    const prevbt = bt.previousSibling;
-                    const btID = bt.id;
-                    bt.remove();
-                    bt = document.createElement('div');
-                    bt.setAttribute('class', 'empty');
-                    bt.setAttribute('id', btID);
                     displayNum(arr, bt);
-                    if(prevbt == null)
-                        parentDiv.insertBefore(bt, parentDiv.firstChild);
-                    else
-                        parentDiv.insertBefore(bt, prevbt.nextSibling);
                 }
             }
             break;
@@ -266,8 +255,11 @@ function gameOver(arr, bt) {
     stopClock();
     const resetbt = document.querySelector('#reset');
     bt.setAttribute('class', 'mine');
-    bt.setAttribute('style', 'background-color: red;');
-    bt.textContent = '*';
+    bt.setAttribute('style', 'background-color: red; border: 0px; padding: 0px;');
+    const img = document.createElement('img');
+    img.setAttribute('style', 'width: 26px; height: 26px');
+    img.setAttribute('src', './Mine-loss.png');
+    bt.appendChild(img);
     document.querySelector('.table').setAttribute('style', 'pointer-events: none;');
     resetbt.querySelector('img').setAttribute('src', './smiley-loss.png');
     const btArr = document.querySelectorAll('.box');
@@ -277,16 +269,12 @@ function gameOver(arr, bt) {
         if(col == 0)
             col = arr[0].length-BUFFERSIZE;
         if(arr[row][col] == -1){
-            const parentDiv = but.parentElement;
-            const prevbt = but.previousSibling;
-            but.remove();
-            const newBt = document.createElement('div');
-            newBt.setAttribute('class', 'mine');
-            newBt.textContent = '*';
-            if(prevbt == null)
-                parentDiv.insertBefore(newBt, parentDiv.firstChild);
-            else
-                parentDiv.insertBefore(newBt, prevbt.nextSibling);
+            if(!but.querySelector('img')){
+                but.setAttribute('class', 'mine');
+                const img = document.createElement('img');
+                img.setAttribute('src', './Mine.png');
+                but.appendChild(img);
+            }
         }
     });
     winorlose = true;
@@ -294,11 +282,11 @@ function gameOver(arr, bt) {
 
 
 function displayNum(arr, bt){
+    const btID = bt.id;
     let row = Math.ceil((Number)(bt.id) / (arr[0].length-BUFFERSIZE));
     let col = (Number)(bt.id) % (arr[0].length-BUFFERSIZE);
     if(col == 0)
         col = arr[0].length-BUFFERSIZE;
-    //console.log('Row '+row+' col '+col);
     if(arr[row][col] == -1 && firstClick){
         let randCol = Math.floor(Math.random() * (arr[0].length-BUFFERSIZE-1)+1);
         while(arr[row][randCol] == -1){
@@ -308,43 +296,74 @@ function displayNum(arr, bt){
         arr[row][randCol] = -1;
         assignNums(arr);
     }
-    else if(arr[row][col] == -1){
+    if(arr[row][col] == -1){
         gameOver(arr, bt);
-        return;
     }
-    if(firstClick)
-        firstClick = false;
-
-    if(arr[row][col] != 0){
+    else if(arr[row][col] > 0){
         bt.textContent = arr[row][col];
         styleNum(arr[row][col], bt);
     }
-    /* else{ //remove all boxes that contain 0
-        const btArr = document.querySelectorAll('.box');
-        btArr.forEach(but => {
-            let row = Math.ceil((Number)(but.id) / (arr[0].length-BUFFERSIZE));
-            let col = (Number)(but.id) % (arr[0].length-BUFFERSIZE);
-            if(col == 0)
-                col = arr[0].length-BUFFERSIZE;
-            if(arr[row][col] == 0){
-                const parentDiv = but.parentElement;
-                const prevbt = but.previousSibling;
-                but.remove();
-                const newBt = document.createElement('div');
-                newBt.setAttribute('class', 'empty');
-                if(prevbt == null)
-                    parentDiv.insertBefore(newBt, parentDiv.firstChild);
-                else
-                    parentDiv.insertBefore(newBt, prevbt.nextSibling);
-                boxCt--;
-            }
-        });
-    } */
+    else if(arr[row][col] == 0){ //remove all boxes that contain 0
+        reveal(arr, row, col);
+        boxCt++;
+    }
+    if(firstClick)
+        firstClick = false;
     boxCt--;
-    //console.log(boxCt);
     if(boxCt == 0)
         gameWin();
+    bt.setAttribute('class', 'empty');
+    bt.setAttribute('id', btID);
+}
 
+function reveal(arr, row, col){
+    if(!isInBounds(row, col, arr) || document.getElementById(row*(arr[0].length-BUFFERSIZE) - (arr[0].length-BUFFERSIZE+1-col-1)).className == 'empty')
+        return;
+    const but = document.getElementById(row*(arr[0].length-BUFFERSIZE) - (arr[0].length-BUFFERSIZE+1-col-1));
+
+    but.setAttribute('class', 'empty');
+    if(arr[row][col] > 0){
+        but.textContent = arr[row][col];
+        styleNum(arr[row][col], but);
+    }
+    if(arr[row][col] == 0){
+        for(let k=0;k < 8;k++){
+                    switch(k){
+                        case 0:
+                            reveal(arr, row, col+1);
+                            break;
+                        case 1:
+                            reveal(arr, row-1, col+1);
+                            break;
+                        case 2:
+                            reveal(arr, row-1, col);
+                            break;
+                        case 3:
+                            reveal(arr, row-1, col-1);
+                            break;
+                        case 4:
+                            reveal(arr, row, col-1);
+                            break;
+                        case 5:
+                            reveal(arr, row+1, col-1);
+                            break;
+                        case 6:
+                            reveal(arr, row+1, col);
+                            break;
+                        case 7:
+                            reveal(arr, row+1, col+1);
+                            break;
+                    }
+        }
+    }
+    boxCt--;
+}
+
+function isInBounds(row, col, arr){
+    if(row < 1 || col < 1 || row > (arr.length-BUFFERSIZE) || col > (arr[0].length-BUFFERSIZE))
+        return false;
+    else
+        return true;
 }
 
 function styleNum(num, bt){
