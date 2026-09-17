@@ -24,13 +24,13 @@ h3 {
 
 .container {
     display: grid;
-    border: 3px outset;
+    border: 3px outset #EDEDED;
     background-color: #BCBCBC;
 }
 
 .display {
     background-color: #3E4345;
-    border: 3px inset;
+    border: 3px inset #EDEDED;
     margin: 10px;
     margin-bottom: 0;
     
@@ -44,13 +44,17 @@ h3 {
 }
 
 .dropdwnbt{
-    border: 3px outset;
+    border: 3px outset #EDEDED;
     margin: 0px 5px 10px 5px;
     font-weight: 600;
 }
 
 .dropdwnbt:active {
     border-style: inset;
+}
+
+.dropdwnbt:hover {
+    background-color: #EEEEEE;
 }
 
 #easy {
@@ -77,7 +81,7 @@ h3 {
 
 .table {
     display: grid;
-    border: 3px inset;
+    border: 3px inset #EDEDED;
     margin: 10px;
     
 }
@@ -87,7 +91,7 @@ h3 {
 }
 
 .box, #reset {
-    border: 3px outset;
+    border: 3px outset #EDEDED;
     background-color: #B8B8B8;
 }
 
@@ -115,7 +119,7 @@ h3 {
 }
 
 .flag:active {
-    border: 3px outset;
+    border: 3px outset #EDEDED;
 } 
 
 .row img {
