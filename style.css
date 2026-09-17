@@ -91,6 +91,11 @@ h3 {
     background-color: #B8B8B8;
 }
 
+.box {
+    width: 26px;
+    height: 26px;
+}
+
 /* .box:active {
     border: 3px inset;
 } */
@@ -101,6 +106,8 @@ h3 {
 
 .blank {
     padding: 10px;
+    width: 26px;
+    height: 26px;
 }
 
 .flag {
