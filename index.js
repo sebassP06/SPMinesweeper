@@ -320,7 +320,11 @@ function reveal(arr, row, col){
     if(!isInBounds(row, col, arr) || document.getElementById(row*(arr[0].length-BUFFERSIZE) - (arr[0].length-BUFFERSIZE+1-col-1)).className == 'empty')
         return;
     const but = document.getElementById(row*(arr[0].length-BUFFERSIZE) - (arr[0].length-BUFFERSIZE+1-col-1));
-
+    if(but.querySelector('img')){
+        but.querySelector('img').remove();
+        flagCt++;
+        displayFlag();
+    }
     but.setAttribute('class', 'empty');
     if(arr[row][col] > 0){
         but.textContent = arr[row][col];
