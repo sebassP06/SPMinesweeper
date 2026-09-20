@@ -298,6 +298,7 @@ function displayNum(arr, bt){
     }
     if(arr[row][col] == -1){
         gameOver(arr, bt);
+        return;
     }
     else if(arr[row][col] > 0){
         bt.textContent = arr[row][col];
