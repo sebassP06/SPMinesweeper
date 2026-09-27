@@ -1,4 +1,4 @@
-/* let easyBtPushed = false, medBtPushed = false, hardBtPushed = false; */
+
 const EASYHEIGHT = 9, EASYWIDTH = 9;
 const MEDHEIGHT = 16, MEDWIDTH = 16;
 const HARDHEIGHT = 16, HARDWIDTH = 30;
@@ -248,6 +248,7 @@ function gameWin() {
     resetbt.querySelector('img').setAttribute('src', './smiley-win.png');
     document.querySelector('.table').setAttribute('style', 'pointer-events: none;');
     winorlose = true;
+    confetti();
     
 }
 
