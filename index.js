@@ -248,8 +248,7 @@ function gameWin() {
     resetbt.querySelector('img').setAttribute('src', './smiley-win.png');
     document.querySelector('.table').setAttribute('style', 'pointer-events: none;');
     winorlose = true;
-    confetti();
-    
+    confetti({count: 300, velocity: 300});
 }
 
 function gameOver(arr, bt) {
