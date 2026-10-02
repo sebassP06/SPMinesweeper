@@ -24,6 +24,7 @@ h3 {
 
 .container {
     display: grid;
+    justify-self: center;
     border: 3px outset #EDEDED;
     background-color: #BCBCBC;
 }
@@ -148,4 +149,11 @@ h3 {
     border: 1px solid gray;
     background-color: #BCBCBC;
     pointer-events: none;
+}
+
+footer{
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
 }
