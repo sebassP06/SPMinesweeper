@@ -65,7 +65,7 @@ function startGame() {
 
 function initArr(event){
     firstClick = true;
-    document.querySelector('#reset').querySelector('img').setAttribute('src', './smiley-face.gif');
+    document.querySelector('#reset').querySelector('img').setAttribute('src', './assets/smiley-face.gif');
     if(winorlose){
         document.querySelector('.table').removeAttribute('style');
         winorlose = false;
@@ -120,7 +120,7 @@ function createFlag(bt){
         flagCt--;
         bt.setAttribute('class', 'box flag');
         const img = document.createElement('img');
-        img.setAttribute('src', './flag1.jpg');
+        img.setAttribute('src', './assets/flag1.jpg');
         bt.appendChild(img);
     }
     displayFlag();
@@ -245,7 +245,7 @@ function displayFlag() {
 function gameWin() {
     stopClock();
     const resetbt = document.querySelector('#reset');
-    resetbt.querySelector('img').setAttribute('src', './smiley-win.png');
+    resetbt.querySelector('img').setAttribute('src', './assets/smiley-win.png');
     document.querySelector('.table').setAttribute('style', 'pointer-events: none;');
     winorlose = true;
     confetti({position: { x: window.innerWidth/2, y: 297 }, count: 200, velocity: 200});
@@ -258,10 +258,10 @@ function gameOver(arr, bt) {
     bt.setAttribute('style', 'background-color: red; border: 0px; padding: 0px;');
     const img = document.createElement('img');
     img.setAttribute('style', 'width: 26px; height: 26px');
-    img.setAttribute('src', './Mine-loss.png');
+    img.setAttribute('src', './assets/Mine-loss.png');
     bt.appendChild(img);
     document.querySelector('.table').setAttribute('style', 'pointer-events: none;');
-    resetbt.querySelector('img').setAttribute('src', './smiley-loss.png');
+    resetbt.querySelector('img').setAttribute('src', './assets/smiley-loss.png');
     const btArr = document.querySelectorAll('.box');
     btArr.forEach(but => {
         const row = Math.ceil((Number)(but.id) / (arr[0].length-BUFFERSIZE));
@@ -272,7 +272,7 @@ function gameOver(arr, bt) {
             if(!but.querySelector('img')){
                 but.setAttribute('class', 'mine');
                 const img = document.createElement('img');
-                img.setAttribute('src', './Mine.png');
+                img.setAttribute('src', './assets/Mine.png');
                 but.appendChild(img);
             }
         }
