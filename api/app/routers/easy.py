@@ -33,7 +33,7 @@ def get_easy_post(id: int):
     return post
 
 @router.put("/{id}")
-def update_posts(id: int, post: schemas.PostCreate):
+def update_medium_posts(id: int, post: schemas.PostCreate):
     auth.cursor.execute("""UPDATE easy SET username = %s, time_data = %s where id = %s returning *""", (post.username, post.time_data, str(id)))
     index = auth.cursor.fetchone()
     auth.conn.commit()
