@@ -1,8 +1,6 @@
 from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
-from fastapi.params import Body
-from typing import Optional, List
 from . import auth
-from .. import schemas
+from .. import schemas, oauth2
 
 router = APIRouter(
     prefix="/hard",
@@ -10,20 +8,20 @@ router = APIRouter(
 )
 
 @router.get("/")
-def get_hard_all():
+def get_hard_all(current_id: str = Depends(oauth2.get_current_id)):
     auth.cursor.execute("""select * from hard order by time_data ASC""")
     table = auth.cursor.fetchall()
     return table
 
 @router.post("/", response_model=schemas.Post)
-def create_hard_post(post: schemas.PostCreate):
+def create_hard_post(post: schemas.PostCreate, current_id: str = Depends(oauth2.get_current_id)):
     auth.cursor.execute("""INSERT INTO hard (username, time_data) VALUES (%s, %s) RETURNING * """, (post.username, post.time_data))
     new_post = auth.cursor.fetchone()
     auth.conn.commit()
     return new_post
 
 @router.get("/{id}")
-def get_hard_post(id: int):
+def get_hard_post(id: int, current_id: str = Depends(oauth2.get_current_id)):
     auth.cursor.execute("""SELECT * FROM hard WHERE id = %s;""", (id,))
     post = auth.cursor.fetchone()
 
@@ -33,7 +31,7 @@ def get_hard_post(id: int):
     return post
 
 @router.put("/{id}")
-def update_hard_posts(id: int, post: schemas.PostCreate):
+def update_hard_posts(id: int, post: schemas.PostCreate, current_id: str = Depends(oauth2.get_current_id)):
     auth.cursor.execute("""UPDATE hard SET username = %s, time_data = %s where id = %s returning *""", (post.username, post.time_data, id,))
     index = auth.cursor.fetchone()
     auth.conn.commit()
