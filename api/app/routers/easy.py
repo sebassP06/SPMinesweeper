@@ -9,7 +9,7 @@ router = APIRouter(
 
 @router.get("/")
 def get_easy_all(current_id: str = Depends(oauth2.get_current_id)):
-    auth.cursor.execute("""select * from easy order by time_data ASC""")
+    auth.cursor.execute("""select * from easy order by time_data ASC LIMIT 10""")
     table = auth.cursor.fetchall()
     return table
 

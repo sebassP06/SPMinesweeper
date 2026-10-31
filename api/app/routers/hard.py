@@ -9,7 +9,7 @@ router = APIRouter(
 
 @router.get("/")
 def get_hard_all(current_id: str = Depends(oauth2.get_current_id)):
-    auth.cursor.execute("""select * from hard order by time_data ASC""")
+    auth.cursor.execute("""select * from hard order by time_data ASC LIMIT 10""")
     table = auth.cursor.fetchall()
     return table
 
