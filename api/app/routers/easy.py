@@ -24,7 +24,7 @@ def create_easy_post(post: schemas.PostCreate):
 
 @router.get("/{id}")
 def get_easy_post(id: int):
-    auth.cursor.execute("""SELECT * FROM easy WHERE id = %s""", (str(id)))
+    auth.cursor.execute("""SELECT * FROM easy WHERE id = %s""", (id,))
     post = auth.cursor.fetchone()
 
     if not post:
@@ -34,7 +34,7 @@ def get_easy_post(id: int):
 
 @router.put("/{id}")
 def update_medium_posts(id: int, post: schemas.PostCreate):
-    auth.cursor.execute("""UPDATE easy SET username = %s, time_data = %s where id = %s returning *""", (post.username, post.time_data, str(id)))
+    auth.cursor.execute("""UPDATE easy SET username = %s, time_data = %s where id = %s returning *""", (post.username, post.time_data, id,))
     index = auth.cursor.fetchone()
     auth.conn.commit()
 
