@@ -1,4 +1,7 @@
 import config from './env.js';
+
+let allTablesArr = [];
+
 async function login() {
   const url = config.MY_URL+"login";
   const formData = new FormData();
@@ -75,7 +78,9 @@ function loading(count){
   if(count % 4 == 0){
     loadingElement.textContent = "Loading"
   }
+  else{
   loadingElement.textContent = loadingElement.textContent+"."
+  }
   return ++count;
 }
 
@@ -85,14 +90,20 @@ async function main() {
     count = loading(count);
   }, 1000);
 
-  await login().then((key) => {
-    get_all(key).then((result) => {
-      fill_Table(result);
-    })
-  });
+  const key = await login();
+  allTablesArr = await get_all(key);
+  fill_Table(allTablesArr);
+  
   clearInterval(loadingId);
   document.querySelector('#loading').hidden = true;
   document.querySelector('table').hidden = false;
 }
 
+function winner_form(){
+
+}
+
+
+
 main();
+export default allTablesArr;
