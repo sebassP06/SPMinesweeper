@@ -1,3 +1,4 @@
+import {allTablesArr, createForm} from './leaderboard.js';
 
 const EASYHEIGHT = 9, EASYWIDTH = 9;
 const MEDHEIGHT = 16, MEDWIDTH = 16;
@@ -5,6 +6,7 @@ const HARDHEIGHT = 16, HARDWIDTH = 30;
 const EASYMINES = 10, MEDMINES = 40, HARDMINES = 99;
 const BUFFERSIZE = 2;
 
+let gameMode = "Easy";
 let winorlose = false;
 let resetTable = false;
 let mineCt = 0;
@@ -77,7 +79,8 @@ function initArr(event){
     }
     stopClock();
     displayTimer();
-    if(event.target.textContent == 'Easy'){
+    gameMode = event.target.textContent;
+    if(gameMode == 'Easy'){
         containerDiv.setAttribute('style', 'width:260px');
         const arr = create2DArray(EASYWIDTH, EASYHEIGHT);
         boxCt = (arr.length-BUFFERSIZE) * (arr[0].length-BUFFERSIZE) - EASYMINES;
@@ -86,7 +89,7 @@ function initArr(event){
         createTable(arr);
         //console.log(arr);
     }
-    else if(event.target.textContent == 'Medium'){
+    else if(gameMode == 'Medium'){
         containerDiv.setAttribute('style', 'width:440px');
         const arr = create2DArray(MEDWIDTH, MEDHEIGHT);
         boxCt = (arr.length-BUFFERSIZE) * (arr[0].length-BUFFERSIZE) - MEDMINES;
@@ -94,7 +97,7 @@ function initArr(event){
         assignNums(arr);
         createTable(arr);
     }
-    else if(event.target.textContent == 'Hard'){
+    else if(gameMode == 'Hard'){
         containerDiv.setAttribute('style', 'width:805px');
         const arr = create2DArray(HARDWIDTH, HARDHEIGHT);
         boxCt = (arr.length-BUFFERSIZE) * (arr[0].length-BUFFERSIZE) - HARDMINES;
@@ -146,7 +149,7 @@ function removebt(ev, bt, arr) {
 }
 
 function create2DArray(width, height) {
-    arr = [];
+    const arr = [];
     for(let i=0;i < height+BUFFERSIZE; i++){
         arr[i] = [];
         for(let j=0;j < width+BUFFERSIZE; j++){
@@ -249,6 +252,17 @@ function gameWin() {
     document.querySelector('.table').setAttribute('style', 'pointer-events: none;');
     winorlose = true;
     confetti({position: { x: window.innerWidth/2, y: 297 }, count: 200, velocity: 200});
+    let mode;
+    if(gameMode == 'Easy')
+        mode = 0;
+    else if(gameMode == 'Medium')
+        mode = 1;
+    else
+        mode = 2;
+    
+    if(allTablesArr[mode][allTablesArr[0].length-1] == null || allTablesArr[mode][allTablesArr[0].length-1].time_data > sec || allTablesArr[mode].length < 10){
+        createForm(gameMode, sec);
+    }
 }
 
 function gameOver(arr, bt) {
