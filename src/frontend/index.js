@@ -259,8 +259,9 @@ function gameWin() {
         mode = 1;
     else
         mode = 2;
-    
-    if(allTablesArr[mode][allTablesArr[0].length-1] == null || allTablesArr[mode][allTablesArr[0].length-1].time_data > sec || allTablesArr[mode].length < 10){
+    if(allTablesArr == null)
+        return;
+    else if(allTablesArr[mode][allTablesArr[0].length-1] == null || allTablesArr[mode][allTablesArr[0].length-1].time_data > sec || allTablesArr[mode].length < 10){
         createForm(gameMode, sec);
     }
 }
