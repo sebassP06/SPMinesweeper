@@ -2,7 +2,7 @@ export default async (request, context) => {
   const url = new URL(request.url);
   
   // 1. Build the target destination URL on Render, preserving the path and query parameters
-  const targetUrl = "https://spminesweeper.onrender.com";
+  const targetUrl = "https://spminesweeper.onrender.com"+url.pathname;
   
   // 2. Clone the incoming request headers
   const headers = new Headers(request.headers);
@@ -20,4 +20,4 @@ export default async (request, context) => {
 };
 
 // 5. Run this function on every single incoming route
-export const config = { path: "/https://benevolent-otter-499988.netlify.app/*" };
+export const config = { path: ["/easy/", "/medium/", "/hard/"] };
