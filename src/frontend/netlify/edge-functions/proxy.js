@@ -20,4 +20,4 @@ export default async (request, context) => {
 };
 
 // 5. Run this function on every single incoming route
-export const config = { path: "/*" };
+export const config = { path: "/https://benevolent-otter-499988.netlify.app/*" };
