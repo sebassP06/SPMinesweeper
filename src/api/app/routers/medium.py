@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
 from . import auth
-from .. import schemas, oauth2
+from .. import schemas, api_key
 
 router = APIRouter(
     prefix="/medium",
@@ -8,20 +8,20 @@ router = APIRouter(
 )
 
 @router.get("/")
-def get_medium_all(current_id: str = Depends(oauth2.get_current_id)):
+def get_medium_all():
     auth.cursor.execute("""select * from medium order by time_data ASC LIMIT 10""")
     table = auth.cursor.fetchall()
     return table
 
 @router.post("/", response_model=schemas.Post)
-def create_medium_post(post: schemas.PostCreate, current_id: str = Depends(oauth2.get_current_id)):
+def create_medium_post(post: schemas.PostCreate):
     auth.cursor.execute("""INSERT INTO medium (username, time_data) VALUES (%s, %s) RETURNING * """, (post.username, post.time_data))
     new_post = auth.cursor.fetchone()
     auth.conn.commit()
     return new_post
 
 @router.get("/{id}")
-def get_medium_post(id: int, current_id: str = Depends(oauth2.get_current_id)):
+def get_medium_post(id: int):
     auth.cursor.execute("""SELECT * FROM medium WHERE id = %s;""", (id,))
     post = auth.cursor.fetchone()
 
@@ -31,7 +31,7 @@ def get_medium_post(id: int, current_id: str = Depends(oauth2.get_current_id)):
     return post
 
 @router.put("/{id}")
-def update_medium_posts(id: int, post: schemas.PostCreate, current_id: str = Depends(oauth2.get_current_id)):
+def update_medium_posts(id: int, post: schemas.PostCreate):
     auth.cursor.execute("""UPDATE medium SET username = %s, time_data = %s where id = %s returning *""", (post.username, post.time_data, id,))
     index = auth.cursor.fetchone()
     auth.conn.commit()

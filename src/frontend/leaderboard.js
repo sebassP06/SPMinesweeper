@@ -2,35 +2,13 @@ import config from './env.js';
 
 export let allTablesArr = [];
 
-async function login() {
-  const url = config.MY_URL+"login";
-  const formData = new FormData();
-  formData.append("username", config.MY_USER);
-  formData.append("password", config.MY_PASS);
-  try {
-      const response = await fetch(url, {
-        method: "POST",
-        body: formData
-    });
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const result = await response.json();
-    return result;
-  } catch (error) {
-      console.error(error.message);
-  }
-    
-}
-
-async function get_table(token, tableName){
+async function get_table(key, tableName){
   const url = config.MY_URL+tableName;
     try {
       const response = await fetch(url, {
         method: "GET",
         headers: {
-          'Authorization' : `Bearer ${token}`
+          "X-API-Key": key
         }
     });
       if (!response.ok) {
@@ -46,9 +24,9 @@ async function get_table(token, tableName){
 
 async function get_all(key){
   try{  
-    const easy = await get_table(key.access_token, "easy/");
-    const medium = await get_table(key.access_token, "medium/");
-    const hard = await get_table(key.access_token, "hard/");
+    const easy = await get_table(key, "easy/");
+    const medium = await get_table(key, "medium/");
+    const hard = await get_table(key, "hard/");
     return [easy, medium, hard];
   }
   catch(error){
@@ -129,7 +107,7 @@ function cancel(event){
 async function submit(event, tableName, timeData){
   event.preventDefault();
   const username = document.getElementById('uname').value;
-  const key = await login();
+  const key = config.API_KEY;
   const url = config.MY_URL+tableName+'/';
 
   const userData = {
@@ -143,7 +121,7 @@ async function submit(event, tableName, timeData){
       const response = await fetch(url, {
         method: "POST",
         headers: {
-          'Authorization' : `Bearer ${key.access_token}`,
+          "X-API-Key": key,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(userData)
@@ -167,7 +145,7 @@ async function main() {
     count = loading(count);
   }, 1000);
 
-  const key = await login();
+  const key = config.API_KEY;
   allTablesArr = await get_all(key);
   fill_Table(allTablesArr);
   

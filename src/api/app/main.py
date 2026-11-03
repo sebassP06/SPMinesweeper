@@ -1,8 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from .routers import easy, medium, hard, auth
 from fastapi.middleware.cors import CORSMiddleware
+from . import api_key
 
-app = FastAPI()
+app = FastAPI(dependencies=[Depends(api_key.validate_api_key)])
 
 origins = ["*"]
 
@@ -18,7 +19,7 @@ app.add_middleware(
 app.include_router(easy.router)
 app.include_router(hard.router)
 app.include_router(medium.router)
-app.include_router(auth.router)
+#app.include_router(auth.router)
 
 @app.get("/")
 def root():
