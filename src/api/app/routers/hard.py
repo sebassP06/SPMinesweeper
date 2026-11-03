@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
 from . import auth
-from .. import schemas, api_key
+from .. import schemas
 
 router = APIRouter(
     prefix="/hard",

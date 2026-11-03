@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends
-from .routers import easy, medium, hard, auth
+from .routers import easy, medium, hard
 from fastapi.middleware.cors import CORSMiddleware
 from . import api_key
 
