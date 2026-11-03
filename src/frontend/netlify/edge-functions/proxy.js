@@ -13,11 +13,7 @@ export default async (request, context) => {
   headers.set("x-api-key", apiKey);
 
   // 4. Forward the exact request details to Render
-  console.log(targetUrl, {
-    method: request.method,
-    headers: headers,
-    body: request.body
-  });
+  
   return fetch(targetUrl, {
     method: request.method,
     headers: headers,
