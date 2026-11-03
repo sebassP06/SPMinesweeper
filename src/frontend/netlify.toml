@@ -2,4 +2,4 @@
   from = "/*"
   to = "https://spminesweeper.onrender.com/:splat"
   status = 200
-  headers = { X-API-Key = "${MY_PRIVATE_KEY}" }
+  headers = { X-API-Key = :MY_PRIVATE_KEY }
