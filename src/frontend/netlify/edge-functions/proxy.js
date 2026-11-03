@@ -8,11 +8,11 @@ export default async (request, context) => {
   const headers = new Headers(request.headers);
   
   // 3. Securely inject your private Netlify environment variable
-  const apiKey = Deno.env.get("MY_PRIVATE_KEY");
+  const apiKey = "jkh294rkjb54nljh4598efhds";//Deno.env.get("MY_PRIVATE_KEY");
   headers.set("X-API-Key", apiKey);
 
   // 4. Forward the exact request details to Render
-  return await fetch(targetUrl, {
+  return fetch(targetUrl, {
     method: request.method,
     headers: headers,
     body: request.body
