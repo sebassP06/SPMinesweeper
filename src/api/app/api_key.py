@@ -12,6 +12,6 @@ def validate_api_key(api_key: str = Security(api_key_header)):
     if api_key != os.getenv('MY_API_KEY'):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid or missing API Key",
+            detail="Invalid or missing API Key::"+api_key,
         )
     return api_key
