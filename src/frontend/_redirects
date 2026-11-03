@@ -1,1 +1,1 @@
-/api/*  https://spminesweeper.onrender.com/:splat  200!  X-API-Key=:MY_PRIVATE_KEY
+/*  https://spminesweeper.onrender.com/:splat  200!  X-API-Key=:MY_PRIVATE_KEY

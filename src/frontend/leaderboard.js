@@ -2,7 +2,7 @@
 export let allTablesArr = [];
 
 async function get_table(tableName){
-  const url = '/api/'+tableName;
+  const url = '/'+tableName+'/';
     try {
       const response = await fetch(url, {
         method: "GET"
@@ -103,7 +103,7 @@ function cancel(event){
 async function submit(event, tableName, timeData){
   event.preventDefault();
   const username = document.getElementById('uname').value;
-  const url = '/api/'+tableName;
+  const url = '/'+tableName+'/';
 
   const userData = {
     username: username,
