@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/*"
+  to = "https://spminesweeper.onrender.com"
+  status = 200
+  headers = { X-API-Key = MY_PRIVATE_KEY }

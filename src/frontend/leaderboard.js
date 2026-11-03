@@ -1,15 +1,11 @@
-import config from './env.js';
 
 export let allTablesArr = [];
 
-async function get_table(key, tableName){
-  const url = config.MY_URL+tableName;
+async function get_table(tableName){
+  const url = '/'+tableName+'/';
     try {
       const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "X-API-Key": key
-        }
+        method: "GET"
     });
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
@@ -22,11 +18,11 @@ async function get_table(key, tableName){
     }
 }
 
-async function get_all(key){
+async function get_all(){
   try{  
-    const easy = await get_table(key, "easy/");
-    const medium = await get_table(key, "medium/");
-    const hard = await get_table(key, "hard/");
+    const easy = await get_table("easy");
+    const medium = await get_table("medium");
+    const hard = await get_table("hard");
     return [easy, medium, hard];
   }
   catch(error){
@@ -107,21 +103,17 @@ function cancel(event){
 async function submit(event, tableName, timeData){
   event.preventDefault();
   const username = document.getElementById('uname').value;
-  const key = config.API_KEY;
-  const url = config.MY_URL+tableName+'/';
+  const url = '/'+tableName+'/';
 
   const userData = {
     username: username,
     time_data: timeData,
   }
-  /* const formData = new FormData();
-  formData.append("username", username);
-  formData.append("time_data", timeData); */
+  
   try {
       const response = await fetch(url, {
         method: "POST",
         headers: {
-          "X-API-Key": key,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(userData)
@@ -145,8 +137,7 @@ async function main() {
     count = loading(count);
   }, 1000);
 
-  const key = config.API_KEY;
-  allTablesArr = await get_all(key);
+  allTablesArr = await get_all();
   fill_Table(allTablesArr);
   
   clearInterval(loadingId);
