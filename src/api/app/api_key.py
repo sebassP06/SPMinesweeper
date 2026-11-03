@@ -5,7 +5,7 @@ import os
 
 load_dotenv()
 
-API_KEY_NAME = "X-API-Key"
+API_KEY_NAME = "x-api-key"
 api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=True)
 
 def validate_api_key(api_key: str = Security(api_key_header)):
