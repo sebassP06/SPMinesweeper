@@ -1,4 +1,16 @@
 export default async (request, context) => {
+  
+  if(request.method == "OPTIONS"){
+    return new Response(null, {
+      status: 204,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, X-API-Key, x-api-key",
+      },
+    });
+  }
+
   const url = new URL(request.url);
   
   // 1. Build the target destination URL on Render, preserving the path and query parameters
