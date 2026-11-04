@@ -131,9 +131,12 @@ async function submit(event, tableName, timeData){
 }
 
 function refresh(){
-  if(document.querySelector('#loading').hidden)
+  if(document.querySelector('#loading').hidden || !(allTablesArr[0] == null)){
     document.querySelector('table').hidden = true;
-  main();
+    document.querySelector('#loading').hidden = false
+    main();
+  }
+
 }
 
 async function main() {
