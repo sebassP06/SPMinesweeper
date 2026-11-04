@@ -165,3 +165,18 @@ footer{
 #cancel {
     margin-left: 5px;
 }
+
+#refresh{
+    margin-top: 15px;
+    margin-left: 10px;
+    background-color: #A8A8A8;
+    padding:0;
+    border: 3px outset #EDEDED;
+    align-self: center;
+    width: 26px;
+    height: 26px;
+}
+
+#refresh:active{
+    border: 3px inset;
+}

@@ -146,3 +146,5 @@ async function main() {
 }
 
 main();
+const refreshBt = document.getElementById('refresh');
+refreshBt.addEventListener('pointerup',() => main());
