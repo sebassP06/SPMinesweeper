@@ -130,10 +130,13 @@ async function submit(event, tableName, timeData){
   }
 }
 
-
-async function main() {
+function refresh(){
   if(document.querySelector('#loading').hidden)
     document.querySelector('table').hidden = true;
+  main();
+}
+
+async function main() {
   let count = 0;
   const loadingId = setInterval(() => {
     count = loading(count);
@@ -149,4 +152,4 @@ async function main() {
 
 main();
 const refreshBt = document.getElementById('refresh');
-refreshBt.addEventListener('pointerup',() => main());
+refreshBt.addEventListener('pointerup',() => refresh());
