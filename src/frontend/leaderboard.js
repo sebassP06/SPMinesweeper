@@ -132,6 +132,8 @@ async function submit(event, tableName, timeData){
 
 
 async function main() {
+  if(document.querySelector('#loading').hidden)
+    document.querySelector('table').hidden = true;
   let count = 0;
   const loadingId = setInterval(() => {
     count = loading(count);
