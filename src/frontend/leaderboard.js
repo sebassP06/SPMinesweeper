@@ -109,7 +109,7 @@ async function submit(event, tableName, timeData){
     username: username,
     time_data: timeData,
   }
-  
+  document.getElementById('winnerForm').replaceChildren();
   try {
       const response = await fetch(url, {
         method: "POST",
@@ -118,12 +118,11 @@ async function submit(event, tableName, timeData){
         },
         body: JSON.stringify(userData)
     });
-    console.log(await response.json());
+    //console.log(await response.json());
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
     
-    document.getElementById('winnerForm').replaceChildren();
     
   } catch (error) {
       console.error(error.message);
