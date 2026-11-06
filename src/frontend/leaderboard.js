@@ -132,7 +132,7 @@ async function submit(event, tableName, timeData){
 function refresh(){
   if(document.querySelector('#loading').hidden || !(allTablesArr[0] == null)){
     document.querySelector('table').hidden = true;
-    document.querySelector('#loading').hidden = false
+    document.querySelector('#loading').hidden = false;
     main();
   }
 
