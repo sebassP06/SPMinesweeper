@@ -1,11 +1,11 @@
 from fastapi import FastAPI, Depends
-from .routers import easy, medium, hard
+from .routers import easy, medium, hard, auth
 from fastapi.middleware.cors import CORSMiddleware
 from . import api_key
 
 app = FastAPI(dependencies=[Depends(api_key.validate_api_key)])
 
-origins = ["*"]
+origins = ["https://spmines.sp06dp07.workers.dev/"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -25,5 +25,31 @@ app.include_router(medium.router)
 def root():
     return {"message": "Hello World"}
 
+@app.get("/all")
+def get_all():
+    auth.cursor.execute("""SELECT *
+FROM (
+    (SELECT *, 'easy' AS difficulty
+     FROM easy
+     ORDER BY time_data ASC
+     LIMIT 10)
+
+    UNION ALL
+
+    (SELECT *, 'medium' AS difficulty
+     FROM medium
+     ORDER BY time_data ASC
+     LIMIT 10)
+
+    UNION ALL
+
+    (SELECT *, 'hard' AS difficulty
+     FROM hard
+     ORDER BY time_data ASC
+     LIMIT 10)
+)
+ORDER BY time_data ASC;""")
+    table = auth.cursor.fetchall()
+    return table
 
 
