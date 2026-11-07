@@ -28,9 +28,9 @@ function fill_Table(tableArr){
       row = 1;
     }
     const dataCell1 = document.getElementById(`${row} ${col}`);
-    dataCell1.textContent = table[i].username;
+    dataCell1.textContent = tableArr[i].username;
     const dataCell2 = document.getElementById(`${row} ${col+1}`);
-    dataCell2.textContent = table[i].time_data;
+    dataCell2.textContent = tableArr[i].time_data;
     row++;
   }
 }
