@@ -5,7 +5,7 @@ from . import api_key
 
 app = FastAPI(dependencies=[Depends(api_key.validate_api_key)])
 
-origins = ["https://spmines.sp06dp07.workers.dev/"]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
