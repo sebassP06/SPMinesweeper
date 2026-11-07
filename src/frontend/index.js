@@ -259,7 +259,7 @@ function gameWin() {
         mode = 19;
     else
         mode = 29;
-    if(allTablesArr == null)
+    if(allTablesArr == null || allTablesArr instanceof Promise)
         return;
     if(allTablesArr[mode].time_data > sec){
         createForm(gameMode, sec);
