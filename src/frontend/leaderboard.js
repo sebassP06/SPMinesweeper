@@ -1,8 +1,8 @@
 
 export let allTablesArr = [];
 
-async function get_table(tableName){
-  const url = 'https://spmines.sp06dp07.workers.dev/'+tableName+'/';
+async function get_tables(){
+  const url = 'https://spmines.sp06dp07.workers.dev/'+'all';
     try {
       const response = await fetch(url, {
         method: "GET"
@@ -18,32 +18,20 @@ async function get_table(tableName){
     }
 }
 
-async function get_all(){
-  try{  
-    const easy = await get_table("easy");
-    const medium = await get_table("medium");
-    const hard = await get_table("hard");
-    return [easy, medium, hard];
-  }
-  catch(error){
-    console.error("One of the requests failed", error);
-  }
-}
-
-function fill_Column(table, col){
-  for(let row = 1; row < table.length + 1; row++){
-    const dataCell1 = document.getElementById(`${row} ${col}`);
-    dataCell1.textContent = table[row-1].username;
-    const dataCell2 = document.getElementById(`${row} ${col+1}`);
-    dataCell2.textContent = table[row-1].time_data;
-  }
-}
-
 function fill_Table(tableArr){
-  let col = 1;
-  for(const table of tableArr){
-    fill_Column(table, col);
-    col += 2;
+  let col = 1, row = 1;
+  let difficulty = 'easy';
+  for(let i = 0;i < tableArr.length;i++){
+    if(difficulty != tableArr[i].difficulty){
+      difficulty = tableArr[i].difficulty;
+      col += 2;
+      row = 1;
+    }
+    const dataCell1 = document.getElementById(`${row} ${col}`);
+    dataCell1.textContent = table[i].username;
+    const dataCell2 = document.getElementById(`${row} ${col+1}`);
+    dataCell2.textContent = table[i].time_data;
+    row++;
   }
 }
 
@@ -144,7 +132,7 @@ async function main() {
     count = loading(count);
   }, 1000);
 
-  allTablesArr = await get_all();
+  allTablesArr = await get_tables();
   fill_Table(allTablesArr);
   
   clearInterval(loadingId);

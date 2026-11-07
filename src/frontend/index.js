@@ -254,16 +254,17 @@ function gameWin() {
     confetti({position: { x: window.innerWidth/2, y: 297 }, count: 200, velocity: 200});
     let mode;
     if(gameMode == 'Easy')
-        mode = 0;
+        mode = 9;
     else if(gameMode == 'Medium')
-        mode = 1;
+        mode = 19;
     else
-        mode = 2;
-    if(allTablesArr[0] == null)
+        mode = 29;
+    if(allTablesArr == null)
         return;
-    else if(allTablesArr[mode][allTablesArr[0].length-1] == null || allTablesArr[mode][allTablesArr[0].length-1].time_data > sec || allTablesArr[mode].length < 10){
+    if(allTablesArr[mode].time_data > sec){
         createForm(gameMode, sec);
     }
+    
 }
 
 function gameOver(arr, bt) {
