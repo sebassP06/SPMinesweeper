@@ -133,6 +133,7 @@ async function main() {
   }, 1000);
 
   allTablesArr = await get_tables();
+  console.log(allTablesArr);
   fill_Table(allTablesArr);
   
   clearInterval(loadingId);
