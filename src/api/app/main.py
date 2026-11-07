@@ -47,8 +47,7 @@ FROM (
      FROM hard
      ORDER BY time_data ASC
      LIMIT 10)
-)
-ORDER BY time_data ASC;""")
+);""")
     table = auth.cursor.fetchall()
     return table
 
