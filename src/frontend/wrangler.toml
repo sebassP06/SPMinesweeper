@@ -1,0 +1,11 @@
+name = "spminesweeper"
+main = "./server.js"
+compatibility_date = "2026-11-01"
+
+[assets]
+directory = "./"
+binding = "ASSETS"
+
+[[services]]
+binding = "SPMINES"
+service = "spmines"

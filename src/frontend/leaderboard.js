@@ -2,7 +2,7 @@
 export let allTablesArr = [];
 
 async function get_tables(){
-  const url = 'https://spmines.sp06dp07.workers.dev/'+'all';
+  const url = '/api/all';
     try {
       const response = await fetch(url, {
         method: "GET"
@@ -91,7 +91,7 @@ function cancel(event){
 async function submit(event, tableName, timeData){
   event.preventDefault();
   const username = document.getElementById('uname').value;
-  const url = 'https://spmines.sp06dp07.workers.dev/'+tableName+'/';
+  const url = '/api/'+tableName+'/';
 
   const userData = {
     username: username,
