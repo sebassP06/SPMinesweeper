@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends
-from .routers import easy, medium, hard, auth
+from .routers import easy, medium, hard, auth, users
 from fastapi.middleware.cors import CORSMiddleware
 from . import api_key
 
@@ -19,6 +19,7 @@ app.add_middleware(
 app.include_router(easy.router)
 app.include_router(hard.router)
 app.include_router(medium.router)
+app.include_router(users.router)
 #app.include_router(auth.router)
 
 @app.get("/")
