@@ -3,7 +3,7 @@ from .routers import easy, medium, hard, auth
 from fastapi.middleware.cors import CORSMiddleware
 from . import api_key
 
-app = FastAPI(dependencies=[Depends(api_key.validate_api_key)])
+app = FastAPI()
 
 origins = ["*"]
 
