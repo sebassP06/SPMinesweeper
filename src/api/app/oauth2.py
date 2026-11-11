@@ -1,6 +1,6 @@
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
-from . import schemas, models
+from . import schemas
 from .routers import auth
 from fastapi import Depends, status, HTTPException
 from fastapi.security import OAuth2PasswordBearer
@@ -42,6 +42,6 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
 
     token = verify_access_token(token, credentials_exception)
 
-    auth.cursor.execute("""select id, username, created_at from users where users.id = %s""", (token.id))
+    auth.cursor.execute("""select id, username, created_at from users where users.id = %s""", (token.id,))
     user = auth.cursor.fetchone()
     return user
