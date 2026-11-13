@@ -32,15 +32,10 @@
                 <button id="refresh"><img src="./assets/refresh.png" width="20px"/></button>
             </div>
             <div style="margin-bottom: 10px;">
-                <button id="global">Global</button>
+                <button id="global" disabled>Global</button>
                 <button id="personal">Personal</button>
             </div>
             <style type="text/css">
-                .tg  {border-collapse:collapse;border-spacing:0;color:white;justify-self:center;/* display:none; */}
-                .tg td{border-color:white;color:white;border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;
-                overflow:hidden;padding:5px 5px;word-break:normal;}
-                .tg th{border-color:white;color:white;border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;
-                font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
                 .tg .tg-xtyi{border-width:1px 0px 1px 1px;font-family:"Times New Roman", Times, serif !important;text-align:left;vertical-align:top}
                 .tg .tg-xo8l{border-width:1px;font-family:"Times New Roman", Times, serif !important;text-align:right;vertical-align:middle}
                 .tg .tg-ggdn{border-width:1px 1px 1px 0px;font-family:"Times New Roman", Times, serif !important;font-size:16px;font-weight:bold;
@@ -56,8 +51,8 @@
                 vertical-align:middle}
                 </style>
                 <div>
-                <h3 id="loading" >Loading</h3>
-                <table class="tg" style="table-layout: fixed; width: 418px;position: relative;filter: blur(5px); z-index: -1;" ><colgroup>
+                <h3 id="loading" hidden>Loading</h3>
+                <table class="tg" id="gtable" style="table-layout: fixed; width: 418px;position: relative; z-index: -1;" ><colgroup>
                 <col style="width: 28px">
                 <col style="width: 97px">
                 <col style="width: 33px">
@@ -69,11 +64,11 @@
                 <thead>
                 <tr>
                     <th class="tg-3mw0"></th>
-                    <th class="tg-f5sl">Easy</th>
+                    <th class="tg-f5sl" style="color:green">Easy</th>
                     <th class="tg-ggdn"></th>
-                    <th class="tg-f5sl">Medium</th>
+                    <th class="tg-f5sl" style="color:blue">Medium</th>
                     <th class="tg-ggdn"></th>
-                    <th class="tg-f5sl">Hard</th>
+                    <th class="tg-f5sl" style="color:red">Hard</th>
                     <th class="tg-ggdn"></th>
                 </tr>
                 </thead>
@@ -169,6 +164,58 @@
                     <td class="tg-4qpt" id="10 6"></td>
                 </tr>
                 </tbody></table>
+                <style>
+                    .tg td, th {border:1px solid}
+                    #ptable th {font-weight: bold;}
+                    #ptable {margin-bottom: 137.5px;}
+                </style>
+                <table class="tg" id="ptable"style="table-layout:fixed;width:274px" hidden><colgroup>
+                <col style="width:28px">
+                <col style="width:82px">
+                <col style="width:82px">
+                <col style="width:82px">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tg-tuye"></th>
+                    <th class="tg-f9dc" style="color:green">Easy</th>
+                    <th class="tg-tuye" style="color:blue">Medium</th>
+                    <th class="tg-tuye" style="color:red">Hard</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tg-emdj">1.</td>
+                    <td class="tg-f9dc"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="tg-emdj">2.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="tg-emdj">3.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="tg-emdj">4.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="tg-emdj">5.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+                </table>
                 </div>
             <footer> <p style="color: white;">Coded by Sebastian Pietkiewicz </p>
                 <div style="margin-left: 10px;">
