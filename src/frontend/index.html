@@ -31,7 +31,10 @@
                 <h2 style="margin-top:40px;margin-left:20px;">Leaderboard</h2>
                 <button id="refresh"><img src="./assets/refresh.png" width="20px"/></button>
             </div>
-            <h3 id="loading">Loading</h3>
+            <div style="margin-bottom: 10px;">
+                <button id="global">Global</button>
+                <button id="personal">Personal</button>
+            </div>
             <style type="text/css">
                 .tg  {border-collapse:collapse;border-spacing:0;color:white;justify-self:center;/* display:none; */}
                 .tg td{border-color:white;color:white;border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;
@@ -52,7 +55,9 @@
                 .tg .tg-4qpt{border-width:1px 1px 1px 0px;font-family:"Times New Roman", Times, serif !important;text-align:right;
                 vertical-align:middle}
                 </style>
-                <table class="tg" style="table-layout: fixed; width: 418px" hidden><colgroup>
+                <div>
+                <h3 id="loading" >Loading</h3>
+                <table class="tg" style="table-layout: fixed; width: 418px;position: relative;filter: blur(5px); z-index: -1;" ><colgroup>
                 <col style="width: 28px">
                 <col style="width: 97px">
                 <col style="width: 33px">
@@ -164,7 +169,7 @@
                     <td class="tg-4qpt" id="10 6"></td>
                 </tr>
                 </tbody></table>
-
+                </div>
             <footer> <p style="color: white;">Coded by Sebastian Pietkiewicz </p>
                 <div style="margin-left: 10px;">
                 <a href="https://github.com/sebassP06" target="_blank">
