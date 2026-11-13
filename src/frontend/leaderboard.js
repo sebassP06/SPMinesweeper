@@ -46,6 +46,16 @@ function loading(count){
   return ++count;
 }
 
+function global(){
+  if(document.querySelector("table").hidden && document.querySelector("#loading").hidden){
+    document.querySelector("table").hidden = false;
+  }
+}
+
+function personal(){
+
+}
+
 export function createForm(tableName, timeData){
   const formDiv = document.getElementById('winnerForm');
   const pDiv = document.createElement('p')
@@ -119,7 +129,7 @@ async function submit(event, tableName, timeData){
 
 function refresh(){
   if(document.querySelector('#loading').hidden || !(allTablesArr[0] == null)){
-    document.querySelector('table').hidden = true;
+    document.querySelector('table').style.removeProperty('filter');
     document.querySelector('#loading').hidden = false;
     main();
   }
@@ -134,12 +144,15 @@ async function main() {
 
   allTablesArr = await get_tables();
   fill_Table(allTablesArr);
-  
   clearInterval(loadingId);
+  document.querySelector('table').style.removeProperty('filter');
   document.querySelector('#loading').hidden = true;
-  document.querySelector('table').hidden = false;
+
 }
 
+const globalBt = document.getElementById('global');
+globalBt.addEventListener('pointerdown', () => global());
 main();
 const refreshBt = document.getElementById('refresh');
 refreshBt.addEventListener('pointerup',() => refresh());
+
