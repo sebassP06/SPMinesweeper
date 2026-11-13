@@ -16,7 +16,7 @@ def get_hard_all():
 
 @router.post("/", response_model=schemas.Post)
 def create_hard_post(post: schemas.PostCreate):
-    auth.cursor.execute("""INSERT INTO hard (username, time_data) VALUES (%s, %s) RETURNING * """, (profanity.censor(post.username[:12]), post.time_data))
+    auth.cursor.execute("""INSERT INTO hard (username, time_data) VALUES (%s, %s) RETURNING * """, (post.username[:12], post.time_data))
     new_post = auth.cursor.fetchone()
     auth.conn.commit()
     return new_post
