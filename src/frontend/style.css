@@ -17,9 +17,12 @@ h2 {
 }
 
 h3 {
+    position: relative;
     color: white;
     margin-top: 0;
-    margin-bottom: 302px;
+    top:180px;
+    z-index: 1;
+    margin-bottom: 0;
 }
 
 .container {
