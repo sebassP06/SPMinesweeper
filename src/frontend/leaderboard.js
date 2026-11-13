@@ -47,12 +47,17 @@ function loading(count){
 }
 
 function global(){
-  if(document.querySelector("table").hidden && document.querySelector("#loading").hidden){
-    document.querySelector("table").hidden = false;
-  }
+  document.getElementById('global').disabled = true;
+  document.getElementById('personal').disabled = false;
+  document.querySelector("#ptable").hidden = true;
+  document.querySelector("#gtable").hidden = false;
 }
 
 function personal(){
+  document.getElementById('personal').disabled = true;
+  document.getElementById('global').disabled = false;
+  document.querySelector("#gtable").hidden = true;
+  document.querySelector("#ptable").hidden = false;
 
 }
 
@@ -129,7 +134,7 @@ async function submit(event, tableName, timeData){
 
 function refresh(){
   if(document.querySelector('#loading').hidden || !(allTablesArr[0] == null)){
-    document.querySelector('table').style.removeProperty('filter');
+    document.querySelector('#gtable').style.removeProperty('filter');
     document.querySelector('#loading').hidden = false;
     main();
   }
@@ -145,11 +150,13 @@ async function main() {
   allTablesArr = await get_tables();
   fill_Table(allTablesArr);
   clearInterval(loadingId);
-  document.querySelector('table').style.removeProperty('filter');
+  document.querySelector('#gtable').style.removeProperty('filter');
   document.querySelector('#loading').hidden = true;
 
 }
 
+const personalBt = document.getElementById('personal');
+personalBt.addEventListener('pointerdown', () => personal());
 const globalBt = document.getElementById('global');
 globalBt.addEventListener('pointerdown', () => global());
 main();
