@@ -20,7 +20,7 @@ h3 {
     position: relative;
     color: white;
     margin-top: 0;
-    top:180px;
+    top:120px;
     z-index: 1;
     margin-bottom: 0;
 }
@@ -183,3 +183,10 @@ footer{
 #refresh:active{
     border: 3px inset;
 }
+
+.tg{border-collapse:collapse;border-spacing:0;color:white;justify-self:center;/* display:none; */}
+.tg td{border-color:white;color:white;border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:5px 5px;word-break:normal;}
+.tg th{border-color:white;color:white;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-tuye{text-align:center;}
+.tg .tg-f9dc{text-align:center;vertical-align:middle;}
+.tg .tg-emdj{text-align:right;}
