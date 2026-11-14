@@ -49,15 +49,17 @@ function loading(count){
 function global(){
   document.getElementById('global').disabled = true;
   document.getElementById('personal').disabled = false;
-  document.querySelector("#ptable").hidden = true;
+  document.querySelector("#ptablediv").hidden = true;
+  document.getElementById("registerorlogin").hidden = true;
   document.querySelector("#gtable").hidden = false;
 }
 
 function personal(){
   document.getElementById('personal').disabled = true;
   document.getElementById('global').disabled = false;
-  document.querySelector("#gtable").hidden = true;
-  document.querySelector("#ptable").hidden = false;
+  document.getElementById("gtable").hidden = true;
+  document.getElementById("ptablediv").hidden = false;
+  document.getElementById("registerorlogin").hidden = false;
 
 }
 
