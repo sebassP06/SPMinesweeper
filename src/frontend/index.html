@@ -6,7 +6,9 @@
     </head>
     <body>
         <div id="everything">
-            <h2>SPMinesweeper</h2>
+            <div class="msbkgrd"><h2>SP<span style="background-color:red;color:black">Mine</span>sweeper<img src="./assets/smiley-win.png" width="25px"></h2>
+            
+            </div>
             <div class="dropdown">
                 <!-- <h3 class="dropbtn">Difficulty</h3> -->
                 <div id="myDropdown" class="dropdown-content">
@@ -28,31 +30,18 @@
             </div>
             <div id="winnerForm"></div>
             <div id="leaderboard" style="display:flex;justify-content:center;">
-                <h2 style="margin-top:40px;margin-left:20px;">Leaderboard</h2>
+                <h2 style="margin-top:40px;margin-left:20px;color:gold"">Leaderboard</h2>
                 <button id="refresh"><img src="./assets/refresh.png" width="20px"/></button>
             </div>
             <div style="margin-bottom: 10px;">
-                <button id="global" disabled>Global</button>
-                <button id="personal">Personal</button>
+                <button id="global" disabled>Global🌎</button>
+                <button id="personal">Personal🏆</button>
             </div>
-            <style type="text/css">
-                .tg .tg-xtyi{border-width:1px 0px 1px 1px;font-family:"Times New Roman", Times, serif !important;text-align:left;vertical-align:top}
-                .tg .tg-xo8l{border-width:1px;font-family:"Times New Roman", Times, serif !important;text-align:right;vertical-align:middle}
-                .tg .tg-ggdn{border-width:1px 1px 1px 0px;font-family:"Times New Roman", Times, serif !important;font-size:16px;font-weight:bold;
-                text-align:left;vertical-align:top}
-                .tg .tg-3mw0{border-width:1px;font-family:"Times New Roman", Times, serif !important;text-align:left;vertical-align:top}
-                .tg .tg-f5sl{border-width:1px 0px 1px 1px;font-family:"Times New Roman", Times, serif !important;font-size:16px;font-weight:bold;
-                text-align:left;vertical-align:top}
-                .tg .tg-8fdz{border-width:1px 1px 1px 0px;font-family:"Times New Roman", Times, serif !important;text-align:right;vertical-align:top
-                }
-                .tg .tg-8y42{border-width:1px 0px 1px 1px;font-family:"Times New Roman", Times, serif !important;text-align:left;
-                vertical-align:middle}
-                .tg .tg-4qpt{border-width:1px 1px 1px 0px;font-family:"Times New Roman", Times, serif !important;text-align:right;
-                vertical-align:middle}
-                </style>
-                <div>
+                <div class="leaderbstyle" id="gtable">
+                <div style="margin:10px;border: 3px inset #EDEDED;">
+                
                 <h3 id="loading" hidden>Loading</h3>
-                <table class="tg" id="gtable" style="table-layout: fixed; width: 418px;position: relative; z-index: -1;" ><colgroup>
+                <table class="tg" style="table-layout: fixed; width: 418px;position: relative; z-index: -1;" ><colgroup>
                 <col style="width: 28px">
                 <col style="width: 97px">
                 <col style="width: 33px">
@@ -164,12 +153,17 @@
                     <td class="tg-4qpt" id="10 6"></td>
                 </tr>
                 </tbody></table>
+                </div>
+                </div>
                 <style>
-                    .tg td, th {border:1px solid}
-                    #ptable th {font-weight: bold;}
-                    #ptable {margin-bottom: 137.5px;}
+                    .tg td, th {border:1px solid; border-color: #808080;}
                 </style>
-                <table class="tg" id="ptable"style="table-layout:fixed;width:274px" hidden><colgroup>
+                <div id="registerorlogin" hidden>
+                    <p><button id="register">Register</button> or <button id="login">Log in</button> to view Personal Leaderboard</p>
+                </div>
+                <div class="leaderbstyle" id="ptablediv" style="width:301px;justify-self: center;" hidden>
+                <div style="margin:10px;border: 3px inset #EDEDED;">
+                <table class="tg" id="ptable"style="table-layout:fixed;width:274px;position: relative; z-index: -1;"><colgroup>
                 <col style="width:28px">
                 <col style="width:82px">
                 <col style="width:82px">
@@ -216,6 +210,7 @@
                 </tr>
                 </tbody>
                 </table>
+                </div>
                 </div>
             <footer> <p style="color: white;">Coded by Sebastian Pietkiewicz </p>
                 <div style="margin-left: 10px;">
