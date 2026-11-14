@@ -184,9 +184,63 @@ footer{
     border: 3px inset;
 }
 
-.tg{border-collapse:collapse;border-spacing:0;color:white;justify-self:center;/* display:none; */}
-.tg td{border-color:white;color:white;border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:5px 5px;word-break:normal;}
-.tg th{border-color:white;color:white;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg{border-collapse:collapse;border-spacing:0;justify-self:center;background-color: #b8b8b8;/* display:none; */}
+.tg td{border:1px solid #808080; font-size:14px;overflow:hidden;padding:5px 5px;word-break:normal;}
+.tg th{border:1px solid #808080;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-xtyi{border-width:1px 0px 1px 1px;border-color: #808080;font-family:"Times New Roman", Times, serif !important;text-align:left;vertical-align:top}
+.tg .tg-xo8l{border-width:1px;border-color: #808080;font-family:"Times New Roman", Times, serif !important;text-align:right;vertical-align:middle}
+.tg .tg-ggdn{border-width:1px 1px 1px 0px;border-color: #808080;font-family:"Times New Roman", Times, serif !important;font-size:16px;font-weight:bold;
+text-align:left;vertical-align:top}
+.tg .tg-3mw0{border-width:1px;border-color: #808080;font-family:"Times New Roman", Times, serif !important;text-align:left;vertical-align:top}
+.tg .tg-f5sl{border-width:1px 0px 1px 1px;border-color: #808080;font-family:"Times New Roman", Times, serif !important;font-size:16px;font-weight:bold;
+text-align:left;vertical-align:top}
+.tg .tg-8fdz{border-width:1px 1px 1px 0px;border-color: #808080;font-family:"Times New Roman", Times, serif !important;text-align:right;vertical-align:top
+}
+.tg .tg-8y42{border-width:1px 0px 1px 1px;border-color: #808080;font-family:"Times New Roman", Times, serif !important;text-align:left;
+vertical-align:middle}
+.tg .tg-4qpt{border-width:1px 1px 1px 0px;border-color: #808080;font-family:"Times New Roman", Times, serif !important;text-align:right;vertical-align:middle}
 .tg .tg-tuye{text-align:center;}
 .tg .tg-f9dc{text-align:center;vertical-align:middle;}
 .tg .tg-emdj{text-align:right;}
+#ptable th {font-weight: bold;}
+/* #ptable {margin-bottom: 78.5px;} */
+
+#registerorlogin p{
+    position: relative;
+    top: -10px;
+    font-size: 18px;
+    color: white;
+}
+
+#register, #login {
+    font-size: 18px;
+    background-color:transparent;
+    color:#B8B8B8;
+    border: 0;
+}
+
+#register:hover, #login:hover {
+    color: white;
+}
+
+#global, #personal{
+    color:#1f1f1f;
+    font-size:17px;
+    background-color: #b8b8b8;
+    border: 3px outset #EDEDED;
+    font-weight: bold;
+}
+
+#global:disabled, #personal:disabled{
+    background-color: #585858;
+    border-style: solid;
+    border-color:#585858;
+}
+
+.leaderbstyle{
+    filter:blur(5px);
+    border: 3px outset #EDEDED; 
+    background-color:#b8b8b8; 
+    position:relative; 
+    z-index:-2;
+}
