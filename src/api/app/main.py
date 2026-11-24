@@ -26,7 +26,7 @@ def root():
     return {"message": "Hello World"}
 
 @app.get("/all")
-def get_all(db = Depends(database.connDB)):
+def get_all():
     auth.cursor.execute("""SELECT *
 FROM (
     (SELECT *, 'easy' AS difficulty
